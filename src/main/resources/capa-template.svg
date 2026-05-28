@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="2560" viewBox="0 0 1600 2560">
+    <defs>
+        <style>
+      .t-huge { font: 900 136px 'Helvetica Neue', Arial, sans-serif; fill: #0f172a; }
+      .t-big { font: 900 108px 'Helvetica Neue', Arial, sans-serif; fill: #0f766e; }
+      .t-med { font: 700 52px 'Helvetica Neue', Arial, sans-serif; fill: #0f172a; }
+      .t-sub { font: 400 40px 'Helvetica Neue', Arial, sans-serif; fill: #475569; }
+      .t-year { font: 900 160px 'Helvetica Neue', Arial, sans-serif; fill: #ea580c; }
+      .t-yearsub { font: 400 32px 'Helvetica Neue', Arial, sans-serif; fill: #6b7280; }
+      .t-author { font: 700 50px 'Helvetica Neue', Arial, sans-serif; fill: #0f172a; }
+      .t-footer { font: 700 28px 'Helvetica Neue', Arial, sans-serif; fill: #ffffff; letter-spacing: 1px; }
+      .t-badge { font: 700 22px 'Helvetica Neue', Arial, sans-serif; fill: #ffffff; }
+      .t-quote { font: 400 34px Georgia, serif; fill: #475569; }
+    </style>
+    </defs>
+
+    <rect width="1600" height="2560" fill="#ffffff" />
+
+    <g opacity="0.9" stroke-linecap="round" stroke-linejoin="round">
+        <g stroke="#0f766e" stroke-width="6" fill="none">
+            <line x1="1320" y1="220" x2="1320" y2="1760" />
+            <line x1="1320" y1="360" x2="1480" y2="360" />
+            <line x1="1320" y1="620" x2="1500" y2="620" />
+            <line x1="1320" y1="880" x2="1460" y2="880" />
+            <line x1="1320" y1="1140" x2="1520" y2="1140" />
+            <line x1="1320" y1="1400" x2="1490" y2="1400" />
+            <line x1="1180" y1="520" x2="1180" y2="1720" />
+            <line x1="1180" y1="700" x2="1320" y2="700" />
+            <line x1="1180" y1="980" x2="1320" y2="980" />
+            <line x1="1180" y1="1260" x2="1320" y2="1260" />
+            <line x1="1180" y1="1540" x2="1320" y2="1540" />
+            <line x1="1040" y1="760" x2="1040" y2="1620" />
+            <line x1="1040" y1="920" x2="1180" y2="920" />
+            <line x1="1040" y1="1180" x2="1180" y2="1180" />
+            <line x1="1040" y1="1460" x2="1180" y2="1460" />
+        </g>
+        <g fill="#0f766e">
+            <circle cx="1320" cy="360" r="18" />
+            <circle cx="1320" cy="620" r="18" />
+            <circle cx="1320" cy="880" r="18" />
+            <circle cx="1320" cy="1140" r="18" />
+            <circle cx="1320" cy="1400" r="18" />
+            <circle cx="1480" cy="360" r="14" />
+            <circle cx="1500" cy="620" r="14" />
+            <circle cx="1460" cy="880" r="14" />
+            <circle cx="1520" cy="1140" r="14" />
+            <circle cx="1490" cy="1400" r="14" />
+        </g>
+        <g fill="none" stroke="#94a3b8" stroke-width="4" opacity="0.65">
+            <circle cx="1180" cy="700" r="14" />
+            <circle cx="1180" cy="980" r="14" />
+            <circle cx="1180" cy="1260" r="14" />
+            <circle cx="1180" cy="1540" r="14" />
+            <circle cx="1040" cy="920" r="12" />
+            <circle cx="1040" cy="1180" r="12" />
+            <circle cx="1040" cy="1460" r="12" />
+        </g>
+    </g>
+
+    <text x="120" y="360" class="t-big">Event</text>
+    <text x="120" y="490" class="t-big">Streaming</text>
+    <text x="120" y="620" class="t-huge">Deep Dive</text>
+
+    <text x="120" y="730" class="t-med">Kafka e Arquiteturas Orientadas</text>
+    <text x="120" y="790" class="t-med">a Eventos</text>
+
+    <line x1="120" y1="820" x2="980" y2="820" stroke="#0f172a" stroke-width="5" />
+
+    <text x="120" y="880" class="t-sub">Contratos, consistência, observabilidade</text>
+    <text x="120" y="940" class="t-sub">e recuperação segura em produção</text>
+
+    <text x="120" y="1220" class="t-year">2026</text>
+    <text x="120" y="1280" class="t-yearsub">Edição de validação editorial</text>
+
+    <line x1="120" y1="1340" x2="980" y2="1340" stroke="#e5e7eb" stroke-width="3" />
+
+    <text x="180" y="1440" class="t-quote">"Event streaming não é só entrega;</text>
+    <text x="180" y="1490" class="t-quote">é decisão sobre o que precisa</text>
+    <text x="180" y="1540" class="t-quote">sobreviver ao tempo."</text>
+
+    <line x1="0" y1="2300" x2="1600" y2="2300" stroke="#e5e7eb" stroke-width="2" />
+
+    <text x="120" y="2265" class="t-author">Roberto Rosa da Silva</text>
+    <rect x="1230" y="2218" width="260" height="58" rx="10" fill="#0f766e" />
+    <text x="1360" y="2255" class="t-badge" text-anchor="middle">EDIÇÃO 2026</text>
+
+    <rect x="0" y="2340" width="1600" height="220" fill="#0f766e" />
+    <text x="800" y="2470" class="t-footer" text-anchor="middle">KAFKA | EVENTS | STREAMING |
+        DISTRIBUTED SYSTEMS</text>
+</svg>
