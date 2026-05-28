@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: event-streaming-deep-dive
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: event-streaming-orderflow
+      auto-offset-reset: earliest
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+
+orderflow:
+  topics:
+    input: order.events.raw
+    output: order.events.curated
