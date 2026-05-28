@@ -9,8 +9,9 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
 /**
- * Adaptador de saída Kafka para publicação de eventos processados.
- * Referência do livro: Event Streaming Deep Dive: Kafka e Arquiteturas Orientadas a Eventos.
+ * Kafka outbound adapter for publishing processed events.
+ * Book reference: Event Streaming Deep Dive: Kafka and Event-Driven
+ * Architectures.
  */
 @Component
 public class KafkaOrderEventPublisherAdapter implements EventPublisherPort {
@@ -20,12 +21,13 @@ public class KafkaOrderEventPublisherAdapter implements EventPublisherPort {
     private final ObjectMapper objectMapper;
 
     /**
-     * Cria o adaptador de publicação Kafka.
-     * Referência do livro: Event Streaming Deep Dive: Kafka e Arquiteturas Orientadas a Eventos.
+     * Creates the Kafka publishing adapter.
+     * Book reference: Event Streaming Deep Dive: Kafka and Event-Driven
+     * Architectures.
      *
-     * @param kafkaTemplate    cliente Kafka para envio de mensagens.
-     * @param topicsProperties propriedades dos tópicos da aplicação.
-     * @param objectMapper     serializador JSON.
+     * @param kafkaTemplate    Kafka client for sending messages.
+     * @param topicsProperties application topic properties.
+     * @param objectMapper     JSON serializer.
      */
     public KafkaOrderEventPublisherAdapter(
             KafkaTemplate<String, String> kafkaTemplate,
@@ -37,10 +39,11 @@ public class KafkaOrderEventPublisherAdapter implements EventPublisherPort {
     }
 
     /**
-     * Serializa e publica o evento no tópico de saída.
-     * Referência do livro: Event Streaming Deep Dive: Kafka e Arquiteturas Orientadas a Eventos.
+     * Serializes and publishes the event to the output topic.
+     * Book reference: Event Streaming Deep Dive: Kafka and Event-Driven
+     * Architectures.
      *
-     * @param orderEvent evento de pedido a ser publicado.
+     * @param orderEvent order event to be published.
      */
     @Override
     public void publishOrderEvent(OrderEvent orderEvent) {
@@ -48,7 +51,7 @@ public class KafkaOrderEventPublisherAdapter implements EventPublisherPort {
             String payload = objectMapper.writeValueAsString(orderEvent);
             kafkaTemplate.send(topicsProperties.output(), orderEvent.orderId(), payload);
         } catch (JsonProcessingException ex) {
-            throw new IllegalStateException("Falha ao serializar evento para publicacao.", ex);
+            throw new IllegalStateException("Failed to serialize event for publication.", ex);
         }
     }
 }

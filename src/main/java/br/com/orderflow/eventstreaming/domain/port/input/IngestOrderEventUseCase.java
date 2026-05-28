@@ -4,17 +4,19 @@ import br.com.orderflow.eventstreaming.domain.model.IngestionResult;
 import br.com.orderflow.eventstreaming.domain.model.OrderEvent;
 
 /**
- * Porta de entrada para ingestão de eventos de pedido.
- * Referência do livro: Event Streaming Deep Dive: Kafka e Arquiteturas Orientadas a Eventos.
+ * Input port for order event ingestion.
+ * Book reference: Event Streaming Deep Dive: Kafka and Event-Driven
+ * Architectures.
  */
 public interface IngestOrderEventUseCase {
 
     /**
-     * Ingesta um evento de pedido aplicando validação e idempotência.
-     * Referência do livro: Event Streaming Deep Dive: Kafka e Arquiteturas Orientadas a Eventos.
+     * Ingests an order event by applying validation and idempotency.
+     * Book reference: Event Streaming Deep Dive: Kafka and Event-Driven
+     * Architectures.
      *
-     * @param orderEvent evento de pedido recebido da borda.
-     * @return resultado funcional da ingestão.
+     * @param orderEvent order event received from the edge.
+     * @return business result of ingestion.
      */
     IngestionResult ingest(OrderEvent orderEvent);
 }

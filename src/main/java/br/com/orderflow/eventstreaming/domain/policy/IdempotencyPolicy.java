@@ -1,25 +1,28 @@
 package br.com.orderflow.eventstreaming.domain.policy;
 
 /**
- * Contrato de política de idempotência para ingestão de eventos.
- * Referência do livro: Event Streaming Deep Dive: Kafka e Arquiteturas Orientadas a Eventos.
+ * Idempotency policy contract for event ingestion.
+ * Book reference: Event Streaming Deep Dive: Kafka and Event-Driven
+ * Architectures.
  */
 public interface IdempotencyPolicy {
 
     /**
-     * Verifica se um evento já foi processado anteriormente.
-     * Referência do livro: Event Streaming Deep Dive: Kafka e Arquiteturas Orientadas a Eventos.
+     * Checks whether an event has already been processed.
+     * Book reference: Event Streaming Deep Dive: Kafka and Event-Driven
+     * Architectures.
      *
-     * @param eventId identificador único do evento.
-     * @return true quando o evento já tiver sido processado.
+     * @param eventId unique identifier for the event.
+     * @return true when the event has already been processed.
      */
     boolean isDuplicate(String eventId);
 
     /**
-     * Registra um evento como processado na política de idempotência.
-     * Referência do livro: Event Streaming Deep Dive: Kafka e Arquiteturas Orientadas a Eventos.
+     * Registers an event as processed in the idempotency policy.
+     * Book reference: Event Streaming Deep Dive: Kafka and Event-Driven
+     * Architectures.
      *
-     * @param eventId identificador único do evento processado.
+     * @param eventId unique identifier for the processed event.
      */
     void registerAsProcessed(String eventId);
 }

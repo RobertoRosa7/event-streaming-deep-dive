@@ -4,17 +4,19 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * Ponto de entrada da aplicação Event Streaming Deep Dive.
- * Referência do livro: Event Streaming Deep Dive: Kafka e Arquiteturas Orientadas a Eventos.
+ * Entry point for the Event Streaming Deep Dive application.
+ * Book reference: Event Streaming Deep Dive: Kafka and Event-Driven
+ * Architectures.
  */
 @SpringBootApplication
 public class EventStreamingDeepDiveApplication {
 
     /**
-     * Inicializa o contexto Spring Boot para execução da aplicação.
-     * Referência do livro: Event Streaming Deep Dive: Kafka e Arquiteturas Orientadas a Eventos.
+     * Initializes the Spring Boot context to run the application.
+     * Book reference: Event Streaming Deep Dive: Kafka and Event-Driven
+     * Architectures.
      *
-     * @param args argumentos de linha de comando recebidos na inicialização.
+     * @param args command-line arguments received at startup.
      */
     public static void main(String[] args) {
         SpringApplication.run(EventStreamingDeepDiveApplication.class, args);

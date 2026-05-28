@@ -4,8 +4,9 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Configuration;
 
 /**
- * Configuração de binding de propriedades de tópicos Kafka.
- * Referência do livro: Event Streaming Deep Dive: Kafka e Arquiteturas Orientadas a Eventos.
+ * Configuration for Kafka topic properties binding.
+ * Book reference: Event Streaming Deep Dive: Kafka and Event-Driven
+ * Architectures.
  */
 @Configuration
 @EnableConfigurationProperties(OrderFlowTopicsProperties.class)

@@ -21,8 +21,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 /**
- * Testes unitários do caso de uso de ingestão de eventos de pedido.
- * Referência do livro: Event Streaming Deep Dive: Kafka e Arquiteturas Orientadas a Eventos.
+ * Unit tests for the order event ingestion use case.
+ * Book reference: Event Streaming Deep Dive: Kafka and Event-Driven
+ * Architectures.
  */
 class IngestOrderEventServiceTest {
 
@@ -35,8 +36,9 @@ class IngestOrderEventServiceTest {
     private IngestOrderEventService ingestOrderEventService;
 
     /**
-     * Configura dependências simuladas para cada cenário de teste.
-     * Referência do livro: Event Streaming Deep Dive: Kafka e Arquiteturas Orientadas a Eventos.
+     * Configures mocked dependencies for each test scenario.
+     * Book reference: Event Streaming Deep Dive: Kafka and Event-Driven
+     * Architectures.
      */
     @BeforeEach
     void setUp() {
@@ -46,8 +48,9 @@ class IngestOrderEventServiceTest {
     }
 
     /**
-     * Garante processamento e publicação quando o evento não é duplicado.
-     * Referência do livro: Event Streaming Deep Dive: Kafka e Arquiteturas Orientadas a Eventos.
+     * Ensures processing and publication when the event is not duplicated.
+     * Book reference: Event Streaming Deep Dive: Kafka and Event-Driven
+     * Architectures.
      */
     @Test
     void shouldProcessValidEventWhenNotDuplicated() {
@@ -62,8 +65,9 @@ class IngestOrderEventServiceTest {
     }
 
     /**
-     * Garante que eventos duplicados não são republicados.
-     * Referência do livro: Event Streaming Deep Dive: Kafka e Arquiteturas Orientadas a Eventos.
+     * Ensures duplicated events are not republished.
+     * Book reference: Event Streaming Deep Dive: Kafka and Event-Driven
+     * Architectures.
      */
     @Test
     void shouldIgnoreDuplicatedEvent() {
@@ -78,8 +82,9 @@ class IngestOrderEventServiceTest {
     }
 
     /**
-     * Garante falha de validação para evento com valor inválido.
-     * Referência do livro: Event Streaming Deep Dive: Kafka e Arquiteturas Orientadas a Eventos.
+     * Ensures validation fails for an event with an invalid amount.
+     * Book reference: Event Streaming Deep Dive: Kafka and Event-Driven
+     * Architectures.
      */
     @Test
     void shouldThrowValidationExceptionWhenAmountIsInvalid() {
@@ -90,10 +95,11 @@ class IngestOrderEventServiceTest {
     }
 
     /**
-     * Cria evento válido para reaproveitamento nos cenários de teste.
-     * Referência do livro: Event Streaming Deep Dive: Kafka e Arquiteturas Orientadas a Eventos.
+     * Creates a valid event for reuse across test scenarios.
+     * Book reference: Event Streaming Deep Dive: Kafka and Event-Driven
+     * Architectures.
      *
-     * @return evento de pedido consistente para testes unitários.
+     * @return consistent order event for unit tests.
      */
     private OrderEvent validOrderEvent() {
         return new OrderEvent(

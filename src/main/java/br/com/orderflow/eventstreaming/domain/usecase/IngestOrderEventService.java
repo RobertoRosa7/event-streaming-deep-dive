@@ -10,8 +10,9 @@ import br.com.orderflow.eventstreaming.domain.port.output.EventPublisherPort;
 import org.springframework.stereotype.Service;
 
 /**
- * Implementação do caso de uso de ingestão de eventos de pedido.
- * Referência do livro: Event Streaming Deep Dive: Kafka e Arquiteturas Orientadas a Eventos.
+ * Implementation of the order event ingestion use case.
+ * Book reference: Event Streaming Deep Dive: Kafka and Event-Driven
+ * Architectures.
  */
 @Service
 public class IngestOrderEventService implements IngestOrderEventUseCase {
@@ -21,13 +22,14 @@ public class IngestOrderEventService implements IngestOrderEventUseCase {
     private final EventPublisherPort eventPublisherPort;
 
     /**
-     * Cria o serviço de ingestão com validação, política de idempotência e
-     * publicação.
-     * Referência do livro: Event Streaming Deep Dive: Kafka e Arquiteturas Orientadas a Eventos.
+     * Creates the ingestion service with validation, idempotency policy, and
+     * publication.
+     * Book reference: Event Streaming Deep Dive: Kafka and Event-Driven
+     * Architectures.
      *
-     * @param orderEventValidator validador de regras de negócio do evento.
-     * @param idempotencyPolicy   política para controle de duplicidade.
-     * @param eventPublisherPort  porta de saída para publicação do evento.
+     * @param orderEventValidator event business-rule validator.
+     * @param idempotencyPolicy   policy for duplicate control.
+     * @param eventPublisherPort  output port for event publication.
      */
     public IngestOrderEventService(
             OrderEventValidator orderEventValidator,
@@ -39,23 +41,24 @@ public class IngestOrderEventService implements IngestOrderEventUseCase {
     }
 
     /**
-     * Executa a ingestão de evento aplicando validação e idempotência antes da
-     * publicação.
-     * Referência do livro: Event Streaming Deep Dive: Kafka e Arquiteturas Orientadas a Eventos.
+     * Executes event ingestion by applying validation and idempotency before
+     * publication.
+     * Book reference: Event Streaming Deep Dive: Kafka and Event-Driven
+     * Architectures.
      *
-     * @param orderEvent evento recebido para processamento.
-     * @return resultado do processamento com status e mensagem funcional.
+     * @param orderEvent event received for processing.
+     * @return processing result with status and business message.
      */
     @Override
     public IngestionResult ingest(OrderEvent orderEvent) {
         orderEventValidator.validate(orderEvent);
 
         if (idempotencyPolicy.isDuplicate(orderEvent.eventId())) {
-            return new IngestionResult(IngestionStatus.DUPLICATED, "Evento duplicado ignorado.");
+            return new IngestionResult(IngestionStatus.DUPLICATED, "Duplicate event ignored.");
         }
 
         eventPublisherPort.publishOrderEvent(orderEvent);
         idempotencyPolicy.registerAsProcessed(orderEvent.eventId());
-        return new IngestionResult(IngestionStatus.PROCESSED, "Evento processado com sucesso.");
+        return new IngestionResult(IngestionStatus.PROCESSED, "Event processed successfully.");
     }
 }

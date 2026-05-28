@@ -11,8 +11,9 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
 /**
- * Adaptador de entrada Kafka responsável por receber eventos brutos de pedido.
- * Referência do livro: Event Streaming Deep Dive: Kafka e Arquiteturas Orientadas a Eventos.
+ * Kafka inbound adapter responsible for receiving raw order events.
+ * Book reference: Event Streaming Deep Dive: Kafka and Event-Driven
+ * Architectures.
  */
 @Component
 public class OrderEventKafkaListener {
@@ -23,12 +24,13 @@ public class OrderEventKafkaListener {
     private final IngestOrderEventUseCase ingestOrderEventUseCase;
 
     /**
-     * Cria o listener Kafka com desserialização JSON e encaminhamento para o caso
-     * de uso.
-     * Referência do livro: Event Streaming Deep Dive: Kafka e Arquiteturas Orientadas a Eventos.
+     * Creates the Kafka listener with JSON deserialization and forwarding to the
+     * use case.
+     * Book reference: Event Streaming Deep Dive: Kafka and Event-Driven
+     * Architectures.
      *
-     * @param objectMapper            serializador e desserializador JSON.
-     * @param ingestOrderEventUseCase porta de entrada para ingestão de eventos.
+     * @param objectMapper            JSON serializer and deserializer.
+     * @param ingestOrderEventUseCase input port for event ingestion.
      */
     public OrderEventKafkaListener(ObjectMapper objectMapper, IngestOrderEventUseCase ingestOrderEventUseCase) {
         this.objectMapper = objectMapper;
@@ -36,11 +38,12 @@ public class OrderEventKafkaListener {
     }
 
     /**
-     * Consome registros do tópico de entrada e aciona a ingestão do evento no
-     * domínio.
-     * Referência do livro: Event Streaming Deep Dive: Kafka e Arquiteturas Orientadas a Eventos.
+     * Consumes records from the input topic and triggers event ingestion in the
+     * domain.
+     * Book reference: Event Streaming Deep Dive: Kafka and Event-Driven
+     * Architectures.
      *
-     * @param record registro Kafka contendo o payload do evento de pedido.
+     * @param record Kafka record containing the order event payload.
      */
     @KafkaListener(topics = "${orderflow.topics.input}")
     public void consume(ConsumerRecord<String, String> record) {
@@ -48,7 +51,7 @@ public class OrderEventKafkaListener {
             OrderEvent orderEvent = objectMapper.readValue(record.value(), OrderEvent.class);
             ingestOrderEventUseCase.ingest(orderEvent);
         } catch (JsonProcessingException ex) {
-            LOGGER.error("Falha ao desserializar evento recebido do topico {}.", record.topic(), ex);
+            LOGGER.error("Failed to deserialize event received from topic {}.", record.topic(), ex);
         }
     }
 }

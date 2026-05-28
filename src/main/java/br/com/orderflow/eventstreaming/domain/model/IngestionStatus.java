@@ -1,19 +1,22 @@
 package br.com.orderflow.eventstreaming.domain.model;
 
 /**
- * Enumera os estados possíveis para a ingestão de eventos.
- * Referência do livro: Event Streaming Deep Dive: Kafka e Arquiteturas Orientadas a Eventos.
+ * Enumerates possible states for event ingestion.
+ * Book reference: Event Streaming Deep Dive: Kafka and Event-Driven
+ * Architectures.
  */
 public enum IngestionStatus {
     /**
-     * Evento processado com sucesso.
-     * Referência do livro: Event Streaming Deep Dive: Kafka e Arquiteturas Orientadas a Eventos.
+     * Event processed successfully.
+     * Book reference: Event Streaming Deep Dive: Kafka and Event-Driven
+     * Architectures.
      */
     PROCESSED,
 
     /**
-     * Evento identificado como duplicado e ignorado.
-     * Referência do livro: Event Streaming Deep Dive: Kafka e Arquiteturas Orientadas a Eventos.
+     * Event identified as duplicated and ignored.
+     * Book reference: Event Streaming Deep Dive: Kafka and Event-Driven
+     * Architectures.
      */
     DUPLICATED
 }

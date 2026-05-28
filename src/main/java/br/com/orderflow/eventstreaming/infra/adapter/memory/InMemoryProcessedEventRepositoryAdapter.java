@@ -6,8 +6,9 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.springframework.stereotype.Component;
 
 /**
- * Adaptador de saída em memória para controle de eventos processados.
- * Referência do livro: Event Streaming Deep Dive: Kafka e Arquiteturas Orientadas a Eventos.
+ * In-memory outbound adapter for processed-event control.
+ * Book reference: Event Streaming Deep Dive: Kafka and Event-Driven
+ * Architectures.
  */
 @Component
 public class InMemoryProcessedEventRepositoryAdapter implements ProcessedEventRepositoryPort {
@@ -15,11 +16,12 @@ public class InMemoryProcessedEventRepositoryAdapter implements ProcessedEventRe
     private final Set<String> processedEventIds = ConcurrentHashMap.newKeySet();
 
     /**
-     * Consulta em memória se um evento já foi processado.
-     * Referência do livro: Event Streaming Deep Dive: Kafka e Arquiteturas Orientadas a Eventos.
+     * Checks in memory whether an event has already been processed.
+     * Book reference: Event Streaming Deep Dive: Kafka and Event-Driven
+     * Architectures.
      *
-     * @param eventId identificador único do evento.
-     * @return true quando o evento existir no conjunto de processados.
+     * @param eventId unique event identifier.
+     * @return true when the event exists in the processed set.
      */
     @Override
     public boolean existsByEventId(String eventId) {
@@ -27,10 +29,11 @@ public class InMemoryProcessedEventRepositoryAdapter implements ProcessedEventRe
     }
 
     /**
-     * Registra em memória um evento como processado.
-     * Referência do livro: Event Streaming Deep Dive: Kafka e Arquiteturas Orientadas a Eventos.
+     * Registers an event as processed in memory.
+     * Book reference: Event Streaming Deep Dive: Kafka and Event-Driven
+     * Architectures.
      *
-     * @param eventId identificador único do evento processado.
+     * @param eventId unique identifier of the processed event.
      */
     @Override
     public void markAsProcessed(String eventId) {

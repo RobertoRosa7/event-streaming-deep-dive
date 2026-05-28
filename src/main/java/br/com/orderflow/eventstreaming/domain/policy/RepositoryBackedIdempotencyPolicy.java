@@ -4,8 +4,9 @@ import br.com.orderflow.eventstreaming.domain.port.output.ProcessedEventReposito
 import org.springframework.stereotype.Component;
 
 /**
- * Implementação de política de idempotência baseada em repositório.
- * Referência do livro: Event Streaming Deep Dive: Kafka e Arquiteturas Orientadas a Eventos.
+ * Repository-backed idempotency policy implementation.
+ * Book reference: Event Streaming Deep Dive: Kafka and Event-Driven
+ * Architectures.
  */
 @Component
 public class RepositoryBackedIdempotencyPolicy implements IdempotencyPolicy {
@@ -13,22 +14,25 @@ public class RepositoryBackedIdempotencyPolicy implements IdempotencyPolicy {
     private final ProcessedEventRepositoryPort processedEventRepositoryPort;
 
     /**
-     * Cria a política de idempotência apoiada por porta de persistência.
-     * Referência do livro: Event Streaming Deep Dive: Kafka e Arquiteturas Orientadas a Eventos.
+     * Creates the idempotency policy backed by a persistence port.
+     * Book reference: Event Streaming Deep Dive: Kafka and Event-Driven
+     * Architectures.
      *
-     * @param processedEventRepositoryPort porta de consulta e registro de eventos
-     *                                     processados.
+     * @param processedEventRepositoryPort port for querying and recording processed
+     *                                     events.
      */
     public RepositoryBackedIdempotencyPolicy(ProcessedEventRepositoryPort processedEventRepositoryPort) {
         this.processedEventRepositoryPort = processedEventRepositoryPort;
     }
 
     /**
-     * Consulta no repositório se o identificador já foi processado.
-     * Referência do livro: Event Streaming Deep Dive: Kafka e Arquiteturas Orientadas a Eventos.
+     * Checks in the repository whether the identifier has already been processed.
+     * Book reference: Event Streaming Deep Dive: Kafka and Event-Driven
+     * Architectures.
      *
-     * @param eventId identificador do evento.
-     * @return true quando o evento já existir no repositório de processados.
+     * @param eventId event identifier.
+     * @return true when the event already exists in the processed-events
+     *         repository.
      */
     @Override
     public boolean isDuplicate(String eventId) {
@@ -36,10 +40,11 @@ public class RepositoryBackedIdempotencyPolicy implements IdempotencyPolicy {
     }
 
     /**
-     * Persiste o evento como processado para garantir idempotência futura.
-     * Referência do livro: Event Streaming Deep Dive: Kafka e Arquiteturas Orientadas a Eventos.
+     * Persists the event as processed to guarantee future idempotency.
+     * Book reference: Event Streaming Deep Dive: Kafka and Event-Driven
+     * Architectures.
      *
-     * @param eventId identificador do evento processado.
+     * @param eventId identifier of the processed event.
      */
     @Override
     public void registerAsProcessed(String eventId) {

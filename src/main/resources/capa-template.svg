@@ -62,28 +62,28 @@
     <text x="120" y="490" class="t-big">Streaming</text>
     <text x="120" y="620" class="t-huge">Deep Dive</text>
 
-    <text x="120" y="730" class="t-med">Kafka e Arquiteturas Orientadas</text>
-    <text x="120" y="790" class="t-med">a Eventos</text>
+    <text x="120" y="730" class="t-med">Kafka and Event-Driven</text>
+    <text x="120" y="790" class="t-med">Architectures</text>
 
     <line x1="120" y1="820" x2="980" y2="820" stroke="#0f172a" stroke-width="5" />
 
-    <text x="120" y="880" class="t-sub">Contratos, consistência, observabilidade</text>
-    <text x="120" y="940" class="t-sub">e recuperação segura em produção</text>
+    <text x="120" y="880" class="t-sub">Contracts, consistency, observability</text>
+    <text x="120" y="940" class="t-sub">and safe recovery in production</text>
 
     <text x="120" y="1220" class="t-year">2026</text>
-    <text x="120" y="1280" class="t-yearsub">Edição de validação editorial</text>
+    <text x="120" y="1280" class="t-yearsub">Editorial Validation Edition</text>
 
     <line x1="120" y1="1340" x2="980" y2="1340" stroke="#e5e7eb" stroke-width="3" />
 
-    <text x="180" y="1440" class="t-quote">"Event streaming não é só entrega;</text>
-    <text x="180" y="1490" class="t-quote">é decisão sobre o que precisa</text>
-    <text x="180" y="1540" class="t-quote">sobreviver ao tempo."</text>
+    <text x="180" y="1440" class="t-quote">"Event streaming is not just delivery;</text>
+    <text x="180" y="1490" class="t-quote">it is a decision about what must</text>
+    <text x="180" y="1540" class="t-quote">survive over time."</text>
 
     <line x1="0" y1="2300" x2="1600" y2="2300" stroke="#e5e7eb" stroke-width="2" />
 
     <text x="120" y="2265" class="t-author">Roberto Rosa da Silva</text>
     <rect x="1230" y="2218" width="260" height="58" rx="10" fill="#0f766e" />
-    <text x="1360" y="2255" class="t-badge" text-anchor="middle">EDIÇÃO 2026</text>
+    <text x="1360" y="2255" class="t-badge" text-anchor="middle">EDITION 2026</text>
 
     <rect x="0" y="2340" width="1600" height="220" fill="#0f766e" />
     <text x="800" y="2470" class="t-footer" text-anchor="middle">KAFKA | EVENTS | STREAMING |

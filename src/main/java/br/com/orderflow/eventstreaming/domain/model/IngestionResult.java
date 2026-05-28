@@ -1,13 +1,14 @@
 package br.com.orderflow.eventstreaming.domain.model;
 
 /**
- * Resultado da ingestão de um evento de pedido.
- * Referência do livro: Event Streaming Deep Dive: Kafka e Arquiteturas Orientadas a Eventos.
+ * Result of ingesting an order event.
+ * Book reference: Event Streaming Deep Dive: Kafka and Event-Driven
+ * Architectures.
  *
- * @param status  status final do processamento do evento.
- * @param message mensagem funcional do resultado da ingestão.
+ * @param status  final status of event processing.
+ * @param message business message for the ingestion result.
  */
 public record IngestionResult(
-        IngestionStatus status,
-        String message) {
+                IngestionStatus status,
+                String message) {
 }

@@ -1,16 +1,18 @@
 package br.com.orderflow.eventstreaming.domain.exception;
 
 /**
- * Exceção de validação de regras de negócio na camada de domínio.
- * Referência do livro: Event Streaming Deep Dive: Kafka e Arquiteturas Orientadas a Eventos.
+ * Exception for business rule validation in the domain layer.
+ * Book reference: Event Streaming Deep Dive: Kafka and Event-Driven
+ * Architectures.
  */
 public class BusinessValidationException extends RuntimeException {
 
     /**
-     * Cria uma exceção de validação com mensagem funcional.
-     * Referência do livro: Event Streaming Deep Dive: Kafka e Arquiteturas Orientadas a Eventos.
+     * Creates a validation exception with a business message.
+     * Book reference: Event Streaming Deep Dive: Kafka and Event-Driven
+     * Architectures.
      *
-     * @param message mensagem da violação de regra de negócio.
+     * @param message business rule violation message.
      */
     public BusinessValidationException(String message) {
         super(message);

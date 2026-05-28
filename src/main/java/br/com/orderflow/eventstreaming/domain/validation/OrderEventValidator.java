@@ -6,45 +6,48 @@ import java.math.BigDecimal;
 import org.springframework.stereotype.Component;
 
 /**
- * Componente de validação de eventos de pedido no domínio.
- * Referência do livro: Event Streaming Deep Dive: Kafka e Arquiteturas Orientadas a Eventos.
+ * Domain validation component for order events.
+ * Book reference: Event Streaming Deep Dive: Kafka and Event-Driven
+ * Architectures.
  */
 @Component
 public class OrderEventValidator {
 
     /**
-     * Valida os campos obrigatórios e regras de consistência do evento.
-     * Referência do livro: Event Streaming Deep Dive: Kafka e Arquiteturas Orientadas a Eventos.
+     * Validates required fields and event consistency rules.
+     * Book reference: Event Streaming Deep Dive: Kafka and Event-Driven
+     * Architectures.
      *
-     * @param orderEvent evento de pedido recebido para validação.
+     * @param orderEvent order event received for validation.
      */
     public void validate(OrderEvent orderEvent) {
         if (orderEvent == null) {
-            throw new BusinessValidationException("Evento de pedido nao pode ser nulo.");
+            throw new BusinessValidationException("Order event cannot be null.");
         }
         if (isBlank(orderEvent.eventId())) {
-            throw new BusinessValidationException("eventId e obrigatorio.");
+            throw new BusinessValidationException("eventId is required.");
         }
         if (isBlank(orderEvent.orderId())) {
-            throw new BusinessValidationException("orderId e obrigatorio.");
+            throw new BusinessValidationException("orderId is required.");
         }
         if (isBlank(orderEvent.customerId())) {
-            throw new BusinessValidationException("customerId e obrigatorio.");
+            throw new BusinessValidationException("customerId is required.");
         }
         if (orderEvent.totalAmount() == null || orderEvent.totalAmount().compareTo(BigDecimal.ZERO) <= 0) {
-            throw new BusinessValidationException("totalAmount deve ser maior que zero.");
+            throw new BusinessValidationException("totalAmount must be greater than zero.");
         }
         if (orderEvent.occurredAt() == null) {
-            throw new BusinessValidationException("occurredAt e obrigatorio.");
+            throw new BusinessValidationException("occurredAt is required.");
         }
     }
 
     /**
-     * Verifica se uma string está vazia ou em branco.
-     * Referência do livro: Event Streaming Deep Dive: Kafka e Arquiteturas Orientadas a Eventos.
+     * Checks whether a string is empty or blank.
+     * Book reference: Event Streaming Deep Dive: Kafka and Event-Driven
+     * Architectures.
      *
-     * @param value valor textual a ser verificado.
-     * @return true quando o valor for nulo, vazio ou apenas com espaços.
+     * @param value text value to be checked.
+     * @return true when the value is null, empty, or only whitespace.
      */
     private boolean isBlank(String value) {
         return value == null || value.isBlank();

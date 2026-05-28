@@ -15,7 +15,7 @@
     <artifactId>event-streaming-deep-dive</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>event-streaming-deep-dive</name>
-    <description>Projeto de referência do livro Event Streaming Deep Dive</description>
+    <description>Reference project for the Event Streaming Deep Dive book</description>
 
     <properties>
         <java.version>17</java.version>

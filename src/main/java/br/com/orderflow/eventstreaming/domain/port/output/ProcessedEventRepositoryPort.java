@@ -1,25 +1,28 @@
 package br.com.orderflow.eventstreaming.domain.port.output;
 
 /**
- * Porta de saída para armazenamento e consulta de eventos processados.
- * Referência do livro: Event Streaming Deep Dive: Kafka e Arquiteturas Orientadas a Eventos.
+ * Output port for storing and querying processed events.
+ * Book reference: Event Streaming Deep Dive: Kafka and Event-Driven
+ * Architectures.
  */
 public interface ProcessedEventRepositoryPort {
 
     /**
-     * Verifica se o evento já foi registrado como processado.
-     * Referência do livro: Event Streaming Deep Dive: Kafka e Arquiteturas Orientadas a Eventos.
+     * Checks whether the event has already been recorded as processed.
+     * Book reference: Event Streaming Deep Dive: Kafka and Event-Driven
+     * Architectures.
      *
-     * @param eventId identificador do evento.
-     * @return true quando o evento já estiver registrado.
+     * @param eventId event identifier.
+     * @return true when the event is already recorded.
      */
     boolean existsByEventId(String eventId);
 
     /**
-     * Marca o evento como processado no repositório.
-     * Referência do livro: Event Streaming Deep Dive: Kafka e Arquiteturas Orientadas a Eventos.
+     * Marks the event as processed in the repository.
+     * Book reference: Event Streaming Deep Dive: Kafka and Event-Driven
+     * Architectures.
      *
-     * @param eventId identificador do evento processado.
+     * @param eventId identifier of the processed event.
      */
     void markAsProcessed(String eventId);
 }

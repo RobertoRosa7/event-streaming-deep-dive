@@ -4,19 +4,20 @@ import java.math.BigDecimal;
 import java.time.Instant;
 
 /**
- * Evento de domínio que representa a ocorrência de pedido na OrderFlow.
- * Referência do livro: Event Streaming Deep Dive: Kafka e Arquiteturas Orientadas a Eventos.
+ * Domain event that represents an order occurrence in OrderFlow.
+ * Book reference: Event Streaming Deep Dive: Kafka and Event-Driven
+ * Architectures.
  *
- * @param eventId     identificador único do evento.
- * @param orderId     identificador do pedido de negócio.
- * @param customerId  identificador do cliente associado ao pedido.
- * @param totalAmount valor total monetário do pedido.
- * @param occurredAt  instante em que o evento ocorreu na origem.
+ * @param eventId     unique identifier for the event.
+ * @param orderId     business order identifier.
+ * @param customerId  identifier of the customer associated with the order.
+ * @param totalAmount total monetary value of the order.
+ * @param occurredAt  timestamp when the event occurred at the source.
  */
 public record OrderEvent(
-        String eventId,
-        String orderId,
-        String customerId,
-        BigDecimal totalAmount,
-        Instant occurredAt) {
+                String eventId,
+                String orderId,
+                String customerId,
+                BigDecimal totalAmount,
+                Instant occurredAt) {
 }

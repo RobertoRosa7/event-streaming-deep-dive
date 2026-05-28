@@ -1,58 +1,58 @@
-# Event Streaming Deep Dive - Projeto Real
+# Event Streaming Deep Dive - Real Project
 
-![Capa do livro](./src/main/resources/capa-template.svg)
+![Book cover](./src/main/resources/capa-template.svg)
 
-Projeto executável sincronizado com o manuscrito **Event Streaming Deep Dive**. Este módulo transforma a narrativa do livro em uma aplicação Spring Boot que recebe eventos brutos de pedido, aplica validação e idempotência no domínio e republica apenas eventos curados para o próximo estágio do pipeline.
+Executable project synchronized with the **Event Streaming Deep Dive** manuscript. This module turns the book's narrative into a Spring Boot application that receives raw order events, applies validation and idempotency in the domain, and republishes only curated events to the next pipeline stage.
 
-## Visão do problema
+## Problem overview
 
-No universo da OrderFlow, o incidente raramente nasce porque o broker caiu. Ele nasce quando um mesmo fato de negócio chega atrasado, duplicado ou fora de ordem e cada serviço reage como se estivesse olhando para uma verdade diferente. O objetivo deste projeto é demonstrar como reduzir esse tipo de incoerência operacional tratando event streaming como disciplina de contrato e efeito de negócio, não como integração assíncrona genérica.
+In the OrderFlow universe, incidents rarely start because the broker is down. They start when the same business fact arrives late, duplicated, or out of order, and each service reacts as if it were seeing a different truth. The goal of this project is to show how to reduce this kind of operational inconsistency by treating event streaming as a discipline of contracts and business effects, not as generic asynchronous integration.
 
-Aqui, o evento representa um fato consumado de pedido. A aplicação consome esse fato no tópico de entrada, valida se o contrato mínimo está consistente, verifica duplicidade antes do efeito e só então publica o evento em um tópico curado. O ponto central é simples: throughput sem semântica só acelera incidente.
+Here, the event represents a completed order fact. The application consumes that fact from the input topic, validates whether the minimum contract is consistent, checks for duplicates before applying effects, and only then publishes the event to a curated topic. The central point is simple: throughput without semantics only accelerates incidents.
 
-## O que este projeto demonstra
+## What this project demonstrates
 
-- pattern policy e validation para separar decisão funcional, validação de contrato e controle de efeito;
-- princípios SOLID aplicados no core da aplicação para manter coesão, testabilidade e baixo acoplamento;
-- arquitetura orientada a eventos com ingestão, curadoria e publicação de fatos de negócio via Kafka;
-- OCP na evolução do fluxo, permitindo introduzir novas políticas, validações e adaptadores sem romper o caso de uso central.
+- policy and validation patterns to separate business decisions, contract validation, and effect control;
+- SOLID principles applied in the application core to keep cohesion, testability, and low coupling;
+- event-driven architecture with ingestion, curation, and publication of business facts through Kafka;
+- OCP in flow evolution, allowing new policies, validations, and adapters without breaking the central use case.
 
-## Fluxo técnico
+## Technical flow
 
-1. O listener Kafka consome mensagens do tópico `order.events.raw`.
-2. O payload JSON é desserializado para o contrato `OrderEvent`.
-3. O caso de uso valida o evento e rejeita entradas inconsistentes.
-4. A política de idempotência verifica se o `eventId` já foi processado.
-5. Eventos inéditos são publicados no tópico `order.events.curated`.
-6. O identificador do evento é registrado para evitar reprocessamento com efeito duplicado.
+1. The Kafka listener consumes messages from the `order.events.raw` topic.
+2. The JSON payload is deserialized into the `OrderEvent` contract.
+3. The use case validates the event and rejects inconsistent inputs.
+4. The idempotency policy checks whether the `eventId` has already been processed.
+5. New events are published to the `order.events.curated` topic.
+6. The event identifier is recorded to prevent reprocessing with duplicated effects.
 
-Esse fluxo espelha a tese central do livro: o consumidor sério não assume entrega perfeita. Ele protege o efeito, explicita a regra funcional e trata replay como capacidade controlada, não como loteria operacional.
+This flow mirrors the book's central thesis: serious consumers do not assume perfect delivery. They protect effects, make business rules explicit, and treat replay as a controlled capability, not as an operational lottery.
 
-## Stack e premissas
+## Stack and assumptions
 
 - Java 17;
 - Spring Boot 3.3;
 - Spring Kafka;
-- Actuator para health, métricas e Prometheus;
-- broker Kafka acessível em `localhost:9092`.
+- Actuator for health, metrics, and Prometheus;
+- Kafka broker reachable at `localhost:9092`.
 
-As propriedades padrão do projeto configuram o consumer group `event-streaming-orderflow`, leitura desde o menor offset disponível e exposição dos endpoints `health`, `info`, `metrics` e `prometheus`.
+The project's default properties configure the `event-streaming-orderflow` consumer group, reading from the earliest available offset, and exposing the `health`, `info`, `metrics`, and `prometheus` endpoints.
 
-## Organização do código
+## Code organization
 
-- `src/main/java/br/com/orderflow/eventstreaming/domain/model`: contrato do evento e resultado de ingestão.
-- `src/main/java/br/com/orderflow/eventstreaming/domain/port`: portas de entrada e saída do domínio.
-- `src/main/java/br/com/orderflow/eventstreaming/domain/usecase`: caso de uso de ingestão do evento.
-- `src/main/java/br/com/orderflow/eventstreaming/domain/policy`: política de idempotência.
-- `src/main/java/br/com/orderflow/eventstreaming/domain/validation`: validações funcionais do evento.
-- `src/main/java/br/com/orderflow/eventstreaming/domain/exception`: exceções de negócio.
-- `src/main/java/br/com/orderflow/eventstreaming/application/kafka`: adaptador de entrada via Kafka.
-- `src/main/java/br/com/orderflow/eventstreaming/infra/adapter`: adaptadores de saída para Kafka e armazenamento em memória.
-- `src/main/java/br/com/orderflow/eventstreaming/infra/config`: configuração de tópicos e propriedades técnicas.
+- `src/main/java/br/com/orderflow/eventstreaming/domain/model`: event contract and ingestion result.
+- `src/main/java/br/com/orderflow/eventstreaming/domain/port`: domain input and output ports.
+- `src/main/java/br/com/orderflow/eventstreaming/domain/usecase`: event ingestion use case.
+- `src/main/java/br/com/orderflow/eventstreaming/domain/policy`: idempotency policy.
+- `src/main/java/br/com/orderflow/eventstreaming/domain/validation`: event business validations.
+- `src/main/java/br/com/orderflow/eventstreaming/domain/exception`: business exceptions.
+- `src/main/java/br/com/orderflow/eventstreaming/application/kafka`: Kafka inbound adapter.
+- `src/main/java/br/com/orderflow/eventstreaming/infra/adapter`: outbound adapters for Kafka and in-memory storage.
+- `src/main/java/br/com/orderflow/eventstreaming/infra/config`: topic configuration and technical properties.
 
-## Contrato do evento
+## Event contract
 
-O payload esperado representa um fato de pedido com rastreabilidade mínima para validação e controle de duplicidade:
+The expected payload represents an order fact with minimal traceability for validation and duplicate control:
 
 ```json
 {
@@ -64,29 +64,29 @@ O payload esperado representa um fato de pedido com rastreabilidade mínima para
 }
 ```
 
-Campos vazios, valores monetários inválidos ou eventos repetidos não devem produzir novo efeito. Essa é a diferença entre processar mensagem e proteger negócio.
+Empty fields, invalid monetary values, or repeated events must not produce new effects. That is the difference between processing messages and protecting the business.
 
-## Como executar
+## How to run
 
-Antes de subir a aplicação, garanta que exista um broker Kafka escutando em `localhost:9092`.
+Before starting the application, make sure a Kafka broker is listening on `localhost:9092`.
 
 ```bash
 mvn clean test
 mvn spring-boot:run
 ```
 
-Se quiser validar rapidamente o desenho antes da execução completa, o primeiro comando já cobre dois pontos críticos: comportamento do caso de uso diante de duplicidade e preservação das fronteiras hexagonais com ArchUnit.
+If you want to quickly validate the design before running everything, the first command already covers two critical points: use case behavior under duplication and preservation of hexagonal boundaries with ArchUnit.
 
-## O que observar durante os testes
+## What to watch during tests
 
-- se o mesmo `eventId` reaparece, o evento é marcado como duplicado e não é republicado;
-- se o contrato chega inconsistente, a validação falha antes de tocar infraestrutura;
-- se a aplicação continuar crescendo, o domínio deve permanecer isolado de Spring e a camada de aplicação não deve depender diretamente de `infra`.
+- if the same `eventId` reappears, the event is marked as duplicated and is not republished;
+- if the contract arrives inconsistent, validation fails before touching infrastructure;
+- as the application grows, the domain must remain isolated from Spring, and the application layer must not depend directly on `infra`.
 
-Esses são exatamente os desvios que o livro trata como recorrentes em produção: retry sem critério, evento mal definido e acoplamento disfarçado de arquitetura orientada a eventos.
+These are exactly the deviations the book treats as recurring in production: retries without criteria, poorly defined events, and coupling disguised as event-driven architecture.
 
-## Relação com o livro
+## Relationship to the book
 
-Este repositório é o código-fonte de referência do manuscrito **Event Streaming Deep Dive: Kafka e Arquiteturas Orientadas a Eventos**. O README segue o mesmo vocabulário editorial do livro: contrato antes de código, chave funcional antes de throughput e idempotência como requisito obrigatório quando há risco de replay, atraso ou entrega duplicada.
+This repository is the reference source code for the manuscript **Event Streaming Deep Dive: Kafka and Event-Driven Architectures**. The README follows the same editorial vocabulary as the book: contract before code, business key before throughput, and idempotency as a mandatory requirement when there is risk of replay, delay, or duplicate delivery.
 
-Se você estiver lendo o manuscrito em paralelo, use este projeto como laboratório para observar a passagem do conceito para a implementação: o capítulo discute por que a jornada diverge; o código mostra onde essa divergência começa a ser controlada.
+If you are reading the manuscript in parallel, use this project as a lab to observe the transition from concept to implementation: the chapter explains why the journey diverges, and the code shows where that divergence starts to be controlled.

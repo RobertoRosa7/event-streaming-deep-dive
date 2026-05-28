@@ -8,44 +8,47 @@ import com.tngtech.archunit.lang.ArchRule;
 import org.junit.jupiter.api.Test;
 
 /**
- * Testes de arquitetura para garantir os limites hexagonais entre camadas.
- * Referência do livro: Event Streaming Deep Dive: Kafka e Arquiteturas Orientadas a Eventos.
+ * Architecture tests to ensure hexagonal boundaries between layers.
+ * Book reference: Event Streaming Deep Dive: Kafka and Event-Driven
+ * Architectures.
  */
 class HexagonalArchitectureTest {
 
-    private static final String BASE_PACKAGE = "br.com.orderflow.eventstreaming";
+        private static final String BASE_PACKAGE = "br.com.orderflow.eventstreaming";
 
-    /**
-     * Verifica que o domínio não depende diretamente de Spring.
-     * Referência do livro: Event Streaming Deep Dive: Kafka e Arquiteturas Orientadas a Eventos.
-     */
-    @Test
-    void domainShouldNotDependOnSpring() {
-        ArchRule rule = noClasses()
-                .that()
-                .resideInAPackage("..domain..")
-                .should()
-                .dependOnClassesThat()
-                .resideInAPackage("org.springframework..");
+        /**
+         * Verifies that the domain does not directly depend on Spring.
+         * Book reference: Event Streaming Deep Dive: Kafka and Event-Driven
+         * Architectures.
+         */
+        @Test
+        void domainShouldNotDependOnSpring() {
+                ArchRule rule = noClasses()
+                                .that()
+                                .resideInAPackage("..domain..")
+                                .should()
+                                .dependOnClassesThat()
+                                .resideInAPackage("org.springframework..");
 
-        rule.check(new ClassFileImporter().withImportOption(ImportOption.Predefined.DO_NOT_INCLUDE_TESTS)
-                .importPackages(BASE_PACKAGE));
-    }
+                rule.check(new ClassFileImporter().withImportOption(ImportOption.Predefined.DO_NOT_INCLUDE_TESTS)
+                                .importPackages(BASE_PACKAGE));
+        }
 
-    /**
-     * Verifica que a aplicação não depende diretamente da infraestrutura.
-     * Referência do livro: Event Streaming Deep Dive: Kafka e Arquiteturas Orientadas a Eventos.
-     */
-    @Test
-    void applicationShouldNotDependOnInfra() {
-        ArchRule rule = noClasses()
-                .that()
-                .resideInAPackage("..application..")
-                .should()
-                .dependOnClassesThat()
-                .resideInAPackage("..infra..");
+        /**
+         * Verifies that the application does not directly depend on infrastructure.
+         * Book reference: Event Streaming Deep Dive: Kafka and Event-Driven
+         * Architectures.
+         */
+        @Test
+        void applicationShouldNotDependOnInfra() {
+                ArchRule rule = noClasses()
+                                .that()
+                                .resideInAPackage("..application..")
+                                .should()
+                                .dependOnClassesThat()
+                                .resideInAPackage("..infra..");
 
-        rule.check(new ClassFileImporter().withImportOption(ImportOption.Predefined.DO_NOT_INCLUDE_TESTS)
-                .importPackages(BASE_PACKAGE));
-    }
+                rule.check(new ClassFileImporter().withImportOption(ImportOption.Predefined.DO_NOT_INCLUDE_TESTS)
+                                .importPackages(BASE_PACKAGE));
+        }
 }

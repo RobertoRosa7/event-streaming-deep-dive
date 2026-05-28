@@ -3,16 +3,18 @@ package br.com.orderflow.eventstreaming.domain.port.output;
 import br.com.orderflow.eventstreaming.domain.model.OrderEvent;
 
 /**
- * Porta de saída responsável pela publicação de eventos processados.
- * Referência do livro: Event Streaming Deep Dive: Kafka e Arquiteturas Orientadas a Eventos.
+ * Output port responsible for publishing processed events.
+ * Book reference: Event Streaming Deep Dive: Kafka and Event-Driven
+ * Architectures.
  */
 public interface EventPublisherPort {
 
     /**
-     * Publica um evento de pedido em canal externo.
-     * Referência do livro: Event Streaming Deep Dive: Kafka e Arquiteturas Orientadas a Eventos.
+     * Publishes an order event to an external channel.
+     * Book reference: Event Streaming Deep Dive: Kafka and Event-Driven
+     * Architectures.
      *
-     * @param orderEvent evento de pedido a ser publicado.
+     * @param orderEvent order event to be published.
      */
     void publishOrderEvent(OrderEvent orderEvent);
 }
